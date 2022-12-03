@@ -40,6 +40,7 @@ Aplicația trebuie să permită crearea unui cont prin care utilizatorul poate s
 -   Modulul de căutare va trebui să permită utilizatorului introducerea unor cuvinte cheie, după care vor fi afișate rezultatele, sub formă de listă.
 -   Modulul va trebui să returneze rezultate relevante în funcție de locație, mijlocul de transport folosit sau destinație
 
+
 # Descriere soluție
 
 Aplicația constă într-un back-end RESTful care accesează date stocate într-o bază relațională pe baza unui API de persistenţă și date expuse de un serviciu extern și frontend SPA (Single Page Application) realizat cu React.
@@ -48,9 +49,10 @@ Aplicația constă într-un back-end RESTful care accesează date stocate într-
 - Stocarea se face într-o bază relațională **SQLite** accesată prin intermediul unui ORM - **sequelize**
 - Front-end-ul este realizat cu **React.js**, front-end framework bazat pe componente
 - Securitate web - se va implementa un mecanism de autentificare și autorizare cu mai multe nivele de acces:
-	- utilizator anonim (neautentificat) - sunt permise doar cautări si vizualizări
+	- utilizator anonim (neautentificat) - sunt permise doar căutări și vizualizări
 	- utilizator autentificat - este permisă introducerea de feedback
 	- administrator aplicație - gestiune date de referință, ca de exemplu adăugarea de linii de transport noi
+
 
 # Structura bazei de date
 
@@ -161,12 +163,32 @@ Exemplu response:
 ```
 
 
-
 # Interfață utilizator
 
 În continuare este prezentat un mock-up pentru interfața utilizator a aplicației în ipoteza în care utilizatorul este conectat și este în curs adăugarea unei experiențe.
 
 ![Interfata utilizator](docs/interfata-utilizator.drawio.png "Interfata utilizator")
 
+În funcție de tipul de utilizator, unele dintre opțiunile din pagină vor fi ascunse.
+1. Un utilizator cu rol de **administrator** (role=Admin) va avea drepturi pentru a gestiona toate cele 3 tipuri de entități:
+	- Experiențe
+	- Linii
+	- Utilizatori
+2. Un **utilizator autentificat** (role=User) va avea dreptul de a gestiona experiențele proprii, dar și de a vizualiza experiențele postate de ceilalți utilizatori. De asemenea va putea vizualiza informațiile privind liniile de transport.
+3. Un **utilizator neautentificat** va avea doar drepturi de vizualizare pentru experiențele adăugate de alți utilizatori și pentru informațiile privind liniile de transport. 
 
+Mai jos este prezentat un mock-up pentru interfața utilizator a aplicației în ipoteza în care utilizatorul cu rol de administrator este conectat și este în curs adăugarea unei linii de transport.
+
+![Interfata utilizator linii](docs/interfata-utilizator-linii.drawio.png "Interfata utilizator-linii")
+
+Mai jos este prezentat un mock-up pentru interfața utilizator a aplicației în ipoteza în care utilizatorul cu rol de administrator este conectat și se află în pagina de gestiune utilizatori.
+
+![Interfata utilizator users](docs/interfata-utilizator-users.drawio.png "Interfata utilizator users")
+
+
+# Plan proiect
+
+În continuare este prezentată planificarea proiectului pentru perioada noiembrie - ianuarie, cu sarcinile de lucru pentru cei trei membri ai echipei.
+
+![Plan proiect](docs/plan-proiect.png "Plan proiect")
 
