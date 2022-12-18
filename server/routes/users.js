@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const Experience = require("../models/experience");
 
 const usersRouter = require("express").Router();
 
@@ -23,12 +24,27 @@ usersRouter.route("/")
 usersRouter.route("/:uid")
     .get(async (req, res) => {
         try {
-            console.log(req.params.uid);
             const user = await User.findByPk(req.params.uid);
             if (user) {
                 res.status(200).json(user);
             } else {
-                res.status(404).json({ message: 'User Not Found' });
+                res.status(404).json({ message: 'User not found' });
+            }
+        } catch(err) {
+            return res.status(500).json(err);
+        }
+    });
+
+usersRouter.route("/:uid/experiences")
+    .get(async (req, res) => {
+        try {
+            const user = await User.findByPk(req.params.uid);
+            if (user) {
+                console.log(user);
+                const experiences = await user.getExperiences();
+                res.status(200).json(experiences);
+            } else {
+                res.status(404).json({ message: 'User not found' });
             }
         } catch(err) {
             return res.status(500).json(err);

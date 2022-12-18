@@ -15,8 +15,9 @@ const User = sequelize.define(
         token: DataTypes.STRING(50),
         expiryDate: DataTypes.DATE,
         role: {
-            type: DataTypes.STRING(10),
-
+            type: DataTypes.ENUM,
+            allowNull: false,
+            values: ['Admin', 'User']
         },
         email: {
             type: DataTypes.STRING,
@@ -26,8 +27,9 @@ const User = sequelize.define(
             allowNull: false
         },
         status: {
-            type: DataTypes.STRING(10),
-            allowNull: false
+            type: DataTypes.ENUM,
+            allowNull: false,
+            values: ['Creat', 'Activ', 'Inactiv']
         }
     },
     {tableName: "Users"}

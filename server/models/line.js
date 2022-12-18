@@ -4,7 +4,7 @@ const sequelize = require("../sequelize");
 const Line = sequelize.define(
     "Line",
     {
-        lineId: {
+        id: {
             type: DataTypes.STRING(10),
             primaryKey: true
         },
