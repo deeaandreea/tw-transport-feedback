@@ -66,16 +66,16 @@ Sunt definite următoarele entități:
 
 ---
 **Experience** - conține datele aferente unei experiențe:
-- **id**: cheia primara, numerică, autoincrement
-- **user_id**: referinta id utilizator - cheie straina entitate **User**
-- **starting_point**: denumirea punctului de plecare, de ex. Eroilor
-- **destination_point**: denumirea punctului de destinație, de ex. Piața Romană
-- **line_id**: referință linie de transport - cheie străină entitate **Line**. Id-ul de linie este cheie naturală, de ex. 381 sau M1, etc.
-- **departure_time**: data și ora plecării, de exemplu: "2022-11-21 14:35"
+- **id**: cheia primară, numerică, autoincrement
+- **userId**: referință id utilizator - cheie straină entitate **User**
+- **startingPoint**: denumirea punctului de plecare, de ex. Eroilor
+- **destinationPoint**: denumirea punctului de destinație, de ex. Piața Romană
+- **lineId**: referință linie de transport - cheie străină entitate **Line**. Id-ul de linie este cheie naturală, de ex. 381 sau M1, etc.
+- **departureTime**: data și ora plecării, de exemplu: "2022-11-21 14:35"
 - **duration**: durata călătoriei exprimată în minute (având în vedere că în mod uzual nu se cronometrează la secundă)
-- **crowding_degree**: gradul de aglomerare exprimat ca procent cu valori între 0 și 100
+- **crowdingDegree**: gradul de aglomerare exprimat ca procent cu valori între 0 și 100
 - **observations**: text editabil în care utilizatorul descrie experiența
-- **satisfaction_level**: câmp obligatoriu - valoare numerică între 1 și 5 care va fi reprezentată prin niște steluțe colorate corespunzător alegerii
+- **satisfactionLevel**: câmp obligatoriu - valoare numerică între 1 și 5 care va fi reprezentată prin niște steluțe colorate corespunzător alegerii
 
 ---
 **User** - datele aferente unui utilizator:
@@ -83,8 +83,9 @@ Sunt definite următoarele entități:
 - **username**: login ales de utilizator, de exemplu nume.prenume. Nu poate fi duplicat
 - **password**: parola. Va fi salvată parola criptată.
 - **token**: pentru un utilizator care a reușit login-ul acest câmp va conține token-ul generat de backend
-- **expiry_date**: dată și ora de expirare conectare, după care este necesar un nou login
+- **expiryDate**: dată și ora de expirare conectare, după care este necesar un nou login
 - **role**: rolul utilizator, cu valori posibile:
+	- Anonim
 	- User
 	- Admin
 - **email**: adresa de email a utilizatorului. Se validează formatul de adresă de email.
@@ -96,13 +97,13 @@ Sunt definite următoarele entități:
 ---
 **Line** - datele aferente unei linii de transport:
 - **id** - identificator linie de transport. Este un câmp alfanumeric, fiind permise atât valori numerice (de ex. 41, 381) cât și alfanumerice (de ex. N118, M1, M2)
-- **transport_type**: este un enum cu valorile: 
+- **transportType**: este un enum cu valorile: 
 	- Autobuz
 	- Tramvai
 	- Troleibuz
 	- Metrou
-- **line_start**: stația capăt de linie de pornire
-- **line_end**: stația finală a liniei de transport
+- **lineStart**: stația capăt de linie de pornire
+- **lineEnd**: stația finală a liniei de transport
 
 
 # API-uri REST
@@ -111,11 +112,11 @@ Sunt definite următoarele entități:
 
 ### User
 
-- `GET /users` - răspunde cu lista tuturor experiențelor
-- `GET /users/:uid` - răspunde cu experiența cu id-ul eid
-- `POST /users` - adaugă o nouă experiență
-- `PUT /users/:uid` - modifică o experiență cu id-ul eid
-- `DELETE /users/:uid` - șterge experiența cu id-ul eid
+- `GET /users` - răspunde cu lista tuturor utilizatorilor
+- `GET /users/:uid` - răspunde cu utilizatorul cu id-ul uid
+- `POST /users` - adaugă un utilizator nou
+- `PUT /users/:uid` - modifică utilizatorul cu id-ul uid
+- `DELETE /users/:uid` - șterge (dezactivează) utilizatorul cu id-ul uid
 
 ### Experience
 
@@ -141,7 +142,7 @@ Sunt definite următoarele entități:
 
 Exemplu request pentru `GET /lines`:
 ```
-GET /lines?transport_type=Metrou&orderBy=id
+GET /lines?transportType=Metrou&orderBy=id
 ```
 
 Exemplu response:

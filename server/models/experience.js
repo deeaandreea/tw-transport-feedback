@@ -21,7 +21,14 @@ const Experience = sequelize.define(
         },
         satisfactionLevel: {
             type: DataTypes.INTEGER(1),
-            values: [1,2,3,4,5]
+            allowNull: false,
+            values: [1,2,3,4,5],
+            validate: {
+                isIn: {
+                    args: [[1,2,3,4,5]],
+                    msg: 'The satisfaction level must be an integer value between 1 and 5'
+                }
+            }
         }
     },
     {tableName: "Experiences"}

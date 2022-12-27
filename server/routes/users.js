@@ -33,6 +33,34 @@ usersRouter.route("/:uid")
         } catch(err) {
             return res.status(500).json(err);
         }
+    })
+    .put(async (req, res) => {
+        try {
+            const user = await User.findByPk(req.params.uid);
+            if (user) {
+                console.log(req.body);
+                await user.update(req.body, { fields: ['password', 'role', 'email', 'status'] });
+                res.status(202).json({message: "User with id = " + req.params.uid + " was updated"});
+            } else {
+                res.status(404).json({ message: 'User not found' });
+            }
+        } catch(err) {
+            return res.status(500).json(err);
+        }
+    })
+    .delete(async (req, res) => {
+        try {
+            const user = await User.findByPk(req.params.uid);
+            if (user) {
+                req.body.status = 'Inactiv';
+                await user.update(req.body, { fields: ['status'] });
+                res.status(202).json({message: "User with id = " + req.params.uid + " is now inactive"});
+            } else {
+                res.status(404).json({ message: 'User not found' });
+            }
+        } catch(err) {
+            return res.status(500).json(err);
+        }
     });
 
 usersRouter.route("/:uid/experiences")

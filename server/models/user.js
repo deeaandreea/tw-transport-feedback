@@ -17,7 +17,13 @@ const User = sequelize.define(
         role: {
             type: DataTypes.ENUM,
             allowNull: false,
-            values: ['Admin', 'User']
+            values: ['Admin', 'User', 'Anonim'],
+            validate: {
+                isIn: {
+                    args: [['Admin', 'User', 'Anonim']],
+                    msg: 'User role is invalid'
+                }
+            }
         },
         email: {
             type: DataTypes.STRING,
@@ -29,7 +35,13 @@ const User = sequelize.define(
         status: {
             type: DataTypes.ENUM,
             allowNull: false,
-            values: ['Creat', 'Activ', 'Inactiv']
+            values: ['Creat', 'Activ', 'Inactiv'],
+            validate: {
+                isIn: {
+                    args: [['Creat', 'Activ', 'Inactiv']],
+                    msg: 'User status is invalid'
+                }
+            }
         }
     },
     {tableName: "Users"}

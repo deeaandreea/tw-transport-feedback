@@ -13,8 +13,10 @@ const Line = require("./models/line");
 const Experience = require("./models/experience");
 
 // define the model relationship
-Line.hasMany(Experience, {as: "experiences"});
-User.hasMany(Experience, {as: "experiences"});
+Line.hasMany(Experience, {foreignKey: "lineId"});
+Experience.belongsTo(Line, {foreignKey: "lineId"});
+User.hasMany(Experience, {foreignKey: "userId"});
+Experience.belongsTo(User, {foreignKey: "userId"});
 
 
 // express midleware

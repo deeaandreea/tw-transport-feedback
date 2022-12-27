@@ -1,0 +1,353 @@
+{
+	"info": {
+		"_postman_id": "957ee0c0-77f4-4711-bcde-55a742d95758",
+		"name": "Transport Feedback",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24975295"
+	},
+	"item": [
+		{
+			"name": "index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}",
+					"host": [
+						"{{base_url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/users",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"vlad\",\r\n    \"password\": \"vlad123\",\r\n    \"role\": \"User\",\r\n    \"email\": \"vlad@gmail.com\",\r\n    \"status\": \"Activ\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/users",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/users/5",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put user",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"vlad\",\r\n    \"password\": \"vlad123\",\r\n    \"role\": \"User\",\r\n    \"email\": \"vlad@gmail.com\",\r\n    \"status\": \"Activ\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/users/5",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get lines",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/lines",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lines"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post line",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"381\",\r\n    \"transportType\": \"Autobuz\",\r\n    \"lineStart\": \"Clabucet\",\r\n    \"lineEnd\": \"Piata Resita\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/lines",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lines"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put line",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"381\",\r\n    \"transportType\": \"Autobuz\",\r\n    \"lineStart\": \"Clabucet\",\r\n    \"lineEnd\": \"Piata Resita\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/lines/381",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lines",
+						"381"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete line",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/lines/381",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lines",
+						"381"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get experiences",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/experiences",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"experiences"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post experience",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 1,\r\n    \"startingPoint\": \"Eroilor\",\r\n    \"destinationPoint\": \"Piata Unirii\",\r\n    \"lineId\": \"M1\",\r\n    \"crowdingDegree\": 90,\r\n    \"observations\": \"Foarte aglomerat\",\r\n    \"satisfactionLevel\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/experiences",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"experiences"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put experience",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 1,\r\n    \"startingPoint\": \"Clabucet\",\r\n    \"destinationPoint\": \"Piata Romana\",\r\n    \"lineId\": \"381\",\r\n    \"crowdingDegree\": 40,\r\n    \"observations\": \"A sosit foaaarte repede\",\r\n    \"satisfactionLevel\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/experiences/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"experiences",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete experience",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/experiences/2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"experiences",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get line experiences",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/lines/381/experiences",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lines",
+						"381",
+						"experiences"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user experiences",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/users/1/experiences",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users",
+						"1",
+						"experiences"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	]
+}

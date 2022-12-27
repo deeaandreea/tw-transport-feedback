@@ -33,6 +33,32 @@ linesRouter.route("/:lid")
         } catch(err) {
             return res.status(500).json(err);
         }
+    })
+    .put(async (req, res) => {
+        try {
+            const line = await Line.findByPk(req.params.lid);
+            if (line) {
+                await line.update(req.body, { fields: ['transportType', 'lineStart', 'lineEnd'] });
+                res.status(202).json({message: "Line with id = " + req.params.lid + " was updated"});
+            } else {
+                res.status(404).json({ message: 'Line not found' });
+            }
+        } catch(err) {
+            return res.status(500).json(err);
+        }
+    })
+    .delete(async (req, res) => {
+        try {
+            const line = await Line.findByPk(req.params.lid);
+            if (line) {
+                await line.destroy();
+                res.status(202).json({message: "Line with id = " + req.params.lid + " was deleted"});
+            } else {
+                res.status(404).json({ message: 'Line not found' });
+            }
+        } catch(err) {
+            return res.status(500).json(err);
+        }
     });
 
 linesRouter.route("/:lid/experiences")

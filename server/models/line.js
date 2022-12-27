@@ -11,7 +11,13 @@ const Line = sequelize.define(
         transportType: {
             type: DataTypes.ENUM,
             allowNull: false,
-            values: ['Autobuz', 'Tramvai', 'Troleibuz', 'Metrou']
+            values: ['Autobuz', 'Tramvai', 'Troleibuz', 'Metrou'],
+            validate: {
+                isIn: {
+                    args: [['Autobuz', 'Tramvai', 'Troleibuz', 'Metrou']],
+                    msg: 'The transport type is invalid'
+                }
+            }
         },
         lineStart: {
             type: DataTypes.STRING(50),
