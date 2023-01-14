@@ -2,7 +2,10 @@
 
 // initialize express
 const express = require("express");
+const cors = require('cors')
+
 const app = express();
+app.use(cors());
 
 // initialize sequelize
 const sequelize = require("./sequelize")
@@ -32,7 +35,7 @@ app.use("/experiences", experiencesRouter);
 
 
 // set port and listen for requests
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, async () => {
     console.log(`Server started on port ${PORT}.`);
     try {

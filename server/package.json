@@ -18,6 +18,7 @@
   "author": "Andreea",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "sequelize": "^6.27.0",
     "sqlite3": "^5.1.4"
