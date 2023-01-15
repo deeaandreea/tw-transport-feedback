@@ -15,6 +15,7 @@ import { FilterMatchMode, FilterOperator } from 'primereact/api'
 import { getExperiences, addExperience, saveExperience, deleteExperience } from '../actions'
 
 const experienceSelector = state => state.experience.experienceList
+const authSelector = state => state.auth.auth
 
 function ExperienceList() {
     const [isDialogShown, setIsDialogShown] = useState(false)
@@ -40,6 +41,7 @@ function ExperienceList() {
     const [globalFilterValue2, setGlobalFilterValue2] = useState('')
 
     const experiences = useSelector(experienceSelector)
+    const auth = useSelector(authSelector)
 
     const dispatch = useDispatch()
 
@@ -47,7 +49,30 @@ function ExperienceList() {
         dispatch(getExperiences())
     }, [])
 
+    const isAuthenticated = () => {
+        const token = auth.token
+        if (token)
+            return true
+	    else
+            return false
+    }
+
+    const isCurrentUser = (username) => {
+        const token = auth.token
+        const loginUsername = auth.username
+        console.log(loginUsername)
+        if (token && loginUsername === username)
+            return true
+	    else
+            return false
+    }
+
+    const isAdmin = () => {
+        return (auth.role === 'Admin')
+    }
+
     const handleAddClick = (evt) => {
+        console.log('Auth: ' + auth)
         setIsDialogShown(true)
         setIsNewRecord(true)
         setStartingPoint('')
@@ -119,15 +144,15 @@ function ExperienceList() {
 
     const dialogFooter = (
         <div>
-            <Button label='Save' icon='pi pi-save' onClick={handleSaveClick} />
+            <Button label='Save' icon='pi pi-save' visible={isAuthenticated} onClick={handleSaveClick} />
         </div>
     )
 
     const opsColumn = (rowData) => {
         return (
             <>
-                <Button label='Edit' icon='pi pi-pencil' onClick={() => editExperience(rowData)} />
-                <Button label='Delete' icon='pi pi-times' className='p-button p-button-danger' onClick={() => handleDeleteExperience(rowData)} />
+                <Button label='Edit' icon='pi pi-pencil' visible={isAdmin || isCurrentUser} onClick={() => editExperience(rowData)} />
+                <Button label='Delete' icon='pi pi-times' visible={isAdmin || isCurrentUser} className='p-button p-button-danger' onClick={() => handleDeleteExperience(rowData)} />
             </>
         )
     }

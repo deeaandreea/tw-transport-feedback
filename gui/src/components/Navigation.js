@@ -1,6 +1,3 @@
-//https://www.section.io/engineering-education/using-prime-react-in-react-applications/
-//https://primefaces.org/primereact/panelmenu/
-import { Menubar } from 'primereact/menubar'
 import { PanelMenu } from 'primereact/panelmenu'
 
 const Navigation = () => {

@@ -27,9 +27,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const usersRouter = require("./routes/users");
+const authRouter = require("./routes/auth");
 const linesRouter = require("./routes/lines");
 const experiencesRouter = require("./routes/experiences");
 app.use("/users", usersRouter);
+app.use("/auth", authRouter);
 app.use("/lines", linesRouter);
 app.use("/experiences", experiencesRouter);
 
