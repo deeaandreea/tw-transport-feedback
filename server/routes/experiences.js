@@ -54,7 +54,7 @@ experiencesRouter.route("/:eid")
         try {
             const experience = await Experience.findByPk(req.params.eid);
             if (experience) {
-                await experience.update(req.body, { fields: ['userId', 'lineId', 'observations', 'satisfactionLevel'] });
+                await experience.update(req.body, { fields: ['userId', 'lineId', 'departureTime', 'duration', 'crowdingDegree', 'observations', 'satisfactionLevel'] });
                 res.status(202).json({message: "Experience with id = " + req.params.eid + " was updated"});
             } else {
                 res.status(404).json({ message: 'Experience not found' });

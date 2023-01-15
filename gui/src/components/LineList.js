@@ -7,6 +7,7 @@ import { Button } from 'primereact/button'
 import { Dialog } from 'primereact/dialog'
 import { InputText } from 'primereact/inputtext'
 import { Panel } from 'primereact/panel'
+import { Dropdown } from 'primereact/dropdown'
 
 import { getLines, addLine, saveLine, deleteLine } from '../actions/line'
 
@@ -28,6 +29,13 @@ function LineList() {
     useEffect(() => {
         dispatch(getLines())
     }, [])
+
+    const transpTypeValues = [
+        {label: 'Autobuz', value: 'Autobuz'},
+        {label: 'Tramvai', value: 'Tramvai'},
+        {label: 'Troleibuz', value: 'Troleibuz'},
+        {label: 'Metrou', value: 'Metrou'}
+    ]
 
     const handleAddClick = (evt) => {
         setIsDialogShown(true)
@@ -93,46 +101,46 @@ function LineList() {
     }
 
     return (
-        <Panel header="Lines">
+        <Panel header="Lines" className="m-3">
             <DataTable value={lines} footer={tableFooter} >
-                <Column header='Id' field='id' />
-                <Column header='Transport Type' field='transportType' />
-                <Column header='Line Start' field='lineStart' />
-                <Column header='Line End' field='lineEnd' />
+                <Column header='Id' field='id' sortable />
+                <Column header='Transport Type' field='transportType' sortable />
+                <Column header='Line Start' field='lineStart' sortable />
+                <Column header='Line End' field='lineEnd' sortable />
 
                 <Column body={opsColumn} />
             </DataTable>
-            <Dialog header='A line' visible={isDialogShown} onHide={hideDialog} footer={dialogFooter}>
+            <Dialog header={isNewRecord ? 'Add line' : 'Edit line'} visible={isDialogShown} onHide={hideDialog} footer={dialogFooter}>
                 <div className="p-grid p-fluid">
                     <div className="grid p-fluid">
-                        <div class="col-4">
+                        <div className="col-4">
                             <label htmlFor="id">Id</label>
                         </div>
-                        <div class="col-8">
+                        <div className="col-8">
                             <InputText id='id' onChange={(evt) => setId(evt.target.value)} value={id} />
                         </div>
                     </div>
                     <div className="grid p-fluid">
-                        <div class="col-4">
+                        <div className="col-4">
                             <label htmlFor="transportType">Transport Type</label>
                         </div>
-                        <div class="col-8">
-                            <InputText id='transportType' onChange={(evt) => setTransportType(evt.target.value)} value={transportType} />
+                        <div className="col-8">
+                            <Dropdown value={transportType} options={transpTypeValues} onChange={(evt) => setTransportType(evt.value)} />
                         </div>
                     </div>
                     <div className="grid p-fluid">
-                        <div class="col-4">
+                        <div className="col-4">
                             <label htmlFor="lineStart">Line Start</label>
                         </div>
-                        <div class="col-8">
+                        <div className="col-8">
                             <InputText id='lineStart' onChange={(evt) => setLineStart(evt.target.value)} value={lineStart} />
                         </div>
                     </div>
                     <div className="grid p-fluid">
-                        <div class="col-4">
+                        <div className="col-4">
                             <label htmlFor="lineEnd">Line End</label>
                         </div>
-                        <div class="col-8">
+                        <div className="col-8">
                             <InputText id='lineEnd' onChange={(evt) => setLineEnd(evt.target.value)} value={lineEnd} />
                         </div>
                     </div>

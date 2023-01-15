@@ -39,7 +39,7 @@ usersRouter.route("/:uid")
             const user = await User.findByPk(req.params.uid);
             if (user) {
                 console.log(req.body);
-                await user.update(req.body, { fields: ['password', 'role', 'email', 'status'] });
+                await user.update(req.body, { fields: ['password', 'role', 'email', 'status', 'expiryDate'] });
                 res.status(202).json({message: "User with id = " + req.params.uid + " was updated"});
             } else {
                 res.status(404).json({ message: 'User not found' });

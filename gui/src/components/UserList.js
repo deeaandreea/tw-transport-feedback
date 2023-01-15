@@ -8,6 +8,7 @@ import { Dialog } from 'primereact/dialog'
 import { InputText } from 'primereact/inputtext'
 import { Calendar } from 'primereact/calendar'
 import { Panel } from 'primereact/panel'
+import { Dropdown } from 'primereact/dropdown'
 
 import { getUsers, addUser, saveUser, deleteUser } from '../actions/user'
 
@@ -34,6 +35,18 @@ function UserList() {
         dispatch(getUsers())
     }, [])
 
+    const statusValues = [
+        {label: 'Creat', value: 'Creat'},
+        {label: 'Activ', value: 'Activ'},
+        {label: 'Inactiv', value: 'Inactiv'}
+    ]
+
+    const roleValues = [
+        {label: 'Admin', value: 'Admin'},
+        {label: 'User', value: 'User'},
+        {label: 'Anonim', value: 'Anonim'}
+    ]
+
     const handleAddClick = (evt) => {
         setIsDialogShown(true)
         setIsNewRecord(true)
@@ -42,7 +55,7 @@ function UserList() {
         setUsername('')
         setPassword('')
         setToken('')
-        setExpiryDate(null)
+        setExpiryDate('')
         setRole('')
         setEmail('')
         setStatus('')
@@ -64,7 +77,7 @@ function UserList() {
         setUsername('')
         setPassword('')
         setToken('')
-        setExpiryDate(null)
+        setExpiryDate('')
         setRole('')
         setEmail('')
         setStatus('')
@@ -109,66 +122,78 @@ function UserList() {
         )
     }
 
+    const formatDate = (value) => {
+        return value.toLocaleDateString('en-US', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+        });
+    }
+
+    const expDateTemplate = (rowData) => {
+        return formatDate(rowData.expiryDate);
+    }
+
     return (
-        <Panel header="Users">
+        <Panel header="Users" className="m-3">
             <DataTable value={users} footer={tableFooter} >
-                <Column header='Username' field='username' />
-                <Column header='Role' field='role' />
-                <Column header='Email' field='email' />
-                <Column header='Status' field='status' />
-                <Column header='Expiry Date' field='expiryDate' />
+                <Column header='Username' field='username' sortable />
+                <Column header='Role' field='role' sortable />
+                <Column header='Email' field='email' sortable />
+                <Column header='Status' field='status' sortable />
+                <Column header='Expiry Date' field='expiryDate' sortable dateTemplate={expDateTemplate} />
 
                 <Column body={opsColumn} />
             </DataTable>
-            <Dialog header='A user' visible={isDialogShown} onHide={hideDialog} footer={dialogFooter}>
+            <Dialog header={isNewRecord ? 'Add user' : 'Edit user'} visible={isDialogShown} onHide={hideDialog} footer={dialogFooter}>
                 <div className="p-grid p-fluid">
                     <div className="grid p-fluid">
-                        <div class="col-4">
+                        <div className="col-4">
                             <label htmlFor="username">Username</label>
                         </div>
-                        <div class="col-8">
+                        <div className="col-8">
                             <InputText id='username' onChange={(evt) => setUsername(evt.target.value)} value={username} />
                         </div>
                     </div>
                     <div className="grid p-fluid">
-                        <div class="col-4">
+                        <div className="col-4">
                             <label htmlFor="password">Password</label>
                         </div>
-                        <div class="col-8">
+                        <div className="col-8">
                             <InputText id='password' onChange={(evt) => setPassword(evt.target.value)} value={password} />
                         </div>
                     </div>
                     <div className="grid p-fluid">
-                        <div class="col-4">
+                        <div className="col-4">
                             <label htmlFor="expiryDate">Expiry Date</label>
                         </div>
-                        <div class="col-8">
-                            <Calendar id="expiryDate" sdateFormat="dd/mm/yy" mask="99/99/9999" showIcon
-                                onChange={(evt) => setExpiryDate(evt.target.value)} value={expiryDate} />
+                        <div className="col-8">
+                            <Calendar id="expiryDate" dateFormat="dd/mm/yy" mask="99/99/9999" showIcon
+                                onChange={(evt) => setExpiryDate(evt.value)} value={expiryDate} />
                         </div>
                     </div>
                     <div className="grid p-fluid">
-                        <div class="col-4">
+                        <div className="col-4">
                             <label htmlFor="role">Role</label>
                         </div>
-                        <div class="col-8">
-                            <InputText id='role' onChange={(evt) => setRole(evt.target.value)} value={role} />
+                        <div className="col-8">
+                            <Dropdown id='role' value={role} options={roleValues} onChange={(evt) => setRole(evt.value)} />
                         </div>
                     </div>
                     <div className="grid p-fluid">
-                        <div class="col-4">
+                        <div className="col-4">
                             <label htmlFor="email">Email</label>
                         </div>
-                        <div class="col-8">
+                        <div className="col-8">
                             <InputText id='email' onChange={(evt) => setEmail(evt.target.value)} value={email} />
                         </div>
                     </div>
                     <div className="grid p-fluid">
-                        <div class="col-4">
-                            <label htmlFor="status">status</label>
+                        <div className="col-4">
+                            <label htmlFor="status">Status</label>
                         </div>
-                        <div class="col-8">
-                            <InputText id='status' onChange={(evt) => setStatus(evt.target.value)} value={status} />
+                        <div className="col-8">
+                            <Dropdown id='status' value={status} options={statusValues} onChange={(evt) => setStatus(evt.value)} />
                         </div>
                     </div>
                 </div>
